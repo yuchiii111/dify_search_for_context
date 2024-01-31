@@ -2,7 +2,7 @@ import re
 from typing import Set
 
 import jieba
-from stopwords import STOPWORDS
+from search.keyword.stopwords import STOPWORDS
 from jieba.analyse import default_tfidf
 
 
