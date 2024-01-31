@@ -22,13 +22,14 @@ class search():
         return final_results
 
 
-    def keyword_search(query: str, k: int = 5) -> List[str]:
-        # 在实际应用中，这里可以使用您的关键词检索实现，返回检索结果
-
-        # 此处仅为示例，返回一些虚构的结果
+    def keyword_search(query: str, k: int = 4, texts: list[Document]) -> List[str]:
+        
+        keywordtable = KeywordTableIndex.create_keyword_table(texts)
+        KeywordTableIndex._retrieve_ids_by_query(keyword_table, query, k)
+        
         results = [
-            {"doc_id": "keyword_doc_1", "score": 0.8, "text": "Keyword result 1"},
-            {"doc_id": "keyword_doc_2", "score": 0.7, "text": "Keyword result 2"},
+            "doc_id",
+            "doc_id",
             # ... 其他结果
         ]
         return results
