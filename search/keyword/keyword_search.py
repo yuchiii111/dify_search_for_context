@@ -1,4 +1,4 @@
-from Jieba_Keyword_Table_Handler import JiebaKeywordTableHandler
+from search.keyword.Jieba_Keyword_Table_Handler import JiebaKeywordTableHandler
 from langchain.schema import BaseRetriever, Document
 from collections import defaultdict
 
