@@ -6,6 +6,9 @@ from stopwords import STOPWORDS
 from jieba.analyse import default_tfidf
 
 
+# extract keywords
+
+
 class JiebaKeywordTableHandler:
 
     def __init__(self):
