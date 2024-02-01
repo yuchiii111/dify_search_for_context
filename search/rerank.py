@@ -28,8 +28,7 @@ class RerankRunner:
             model=model,
             top_n=top_n
         )
-              
-        "/home/yuhp/llm_models/all_models/rank_model/bge-reranker-base"
+       
 
         rerank_results = []
         for idx, result in enumerate(results):
