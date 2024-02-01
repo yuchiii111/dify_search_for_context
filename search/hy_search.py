@@ -57,13 +57,15 @@ class search():
             )
 
             embeddings = CacheEmbedding(embedding_model)
+            # 生成一个实例
 
-            return VectorIndex(
+            return WeaviateVectorIndex(
                 dataset=dataset,
                 config=current_app.config,
                 embeddings=embeddings
             )
+           # 生成一个实例
 
-          1.cacheembedding
-          2.vectorindex
+
+          1.vectorindex
 
