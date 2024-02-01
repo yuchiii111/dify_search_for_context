@@ -23,9 +23,9 @@ class search():
 
 
     def keyword_search(query: str, k: int = 4, texts: list[Document]) -> List[str]:
-        
-        keywordtable = KeywordTableIndex.create_keyword_table(texts)
-        KeywordTableIndex._retrieve_ids_by_query(keyword_table, query, k)
+        _keyword_search = KeywordTableIndex()
+        keywordtable = _keyword_search.create_keyword_table(texts)
+        _keyword_search._retrieve_ids_by_query(keyword_table, query, k)
         
         results = [
             "doc_id",
