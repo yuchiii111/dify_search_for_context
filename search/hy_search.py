@@ -66,6 +66,18 @@ class search():
             )
            # 生成一个实例
 
+if documents:         
+                    all_documents = []
+                    rerank_runner = RerankRunner()
+                      
+                    all_documents.extend(rerank_runner.run(
+                        query=query,
+                        documents=documents,
+                        score_threshold=0.34,
+                        top_n=len(documents)
+                        model="/home/yuhp/llm_models/all_models/rank_model/bge-reranker-base"
+                    ))
+                else:
+                    all_documents.extend(documents)
 
-          1.vectorindex
 
