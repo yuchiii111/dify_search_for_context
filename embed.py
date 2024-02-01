@@ -3,6 +3,8 @@ from langchain.vectorstores import Chroma
 import numpy as np
 from typing import List
 
+1.ivoke_text_embedding
+
 class embed():
     def embedding_query(self, text) -> List[float]:
         model_name = "BAAI/bge-Large-zh"
