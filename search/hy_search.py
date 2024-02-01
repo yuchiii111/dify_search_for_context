@@ -32,4 +32,38 @@ class search():
             "doc_id",
             # ... 其他结果
         ]
+
         return results
+
+    
+    class vector_search:
+    def similarity_search(self, query: str, k: int = 5) -> List[str]:
+        # 在实际应用中，这里可以使用 Milvus 进行向量相似度检索，返回检索结果
+        # 此处仅为示例，返回一些虚构的结果
+        results = [
+            {"doc_id": "milvus_doc_1", "score": 0.9, "text": "Milvus result 1"},
+            {"doc_id": "milvus_doc_2", "score": 0.85, "text": "Milvus result 2"},
+            # ... 其他结果
+        ]
+        
+        return results
+
+        
+         embedding_model = model_manager.get_model_instance(
+                tenant_id=dataset.tenant_id,
+                model_type=ModelType.TEXT_EMBEDDING,
+                provider=dataset.embedding_model_provider,
+                model=dataset.embedding_model
+            )
+
+            embeddings = CacheEmbedding(embedding_model)
+
+            return VectorIndex(
+                dataset=dataset,
+                config=current_app.config,
+                embeddings=embeddings
+            )
+
+          1.cacheembedding
+          2.vectorindex
+
