@@ -1,8 +1,10 @@
 from typing import List, Optional
 from langchain.schema import Document
 import cohere
+import torch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-# api=? 其他写完了
+# 直接用了本地模型，没用cohere
 
 class RerankRunner:
 
@@ -19,24 +21,32 @@ class RerankRunner:
                 doc_id.append(document.metadata['doc_id'])
                 docs.append(document.page_content)
                 
+        
+        # api_key = ''
+        # co = cohere.Client(api_key)
+        # results = co.rerank(
+        #     query=query,
+        #     documents=docs,
+        #     model=model,
+        #     top_n=top_n
+        # )
+        
+        tokenizer = AutoTokenizer.from_pretrained(model)
+        model_r = AutoModelForSequenceClassification.from_pretrained(model)
+        model_r.eval()
+                
+        with torch.no_grad():
+            inputs = tokenizer(docs, padding=True, truncation=True, return_tensors='pt', max_length=512)
+            results = model_r(**inputs, return_dict=True).logits.view(-1, ).float()
 
-        api_key = ''
-        co = cohere.Client(api_key)
-        results = co.rerank(
-            query=query,
-            documents=docs,
-            model=model,
-            top_n=top_n
-        )
        
-
         rerank_results = []
-        for idx, result in enumerate(results):
+        for idx, result in enumerate(results.items):
             # format document
             rerank_result = RerankDocument(
-                index=result.index,
-                text=result.document['text'],
-                score=result.relevance_score,
+                index=idx,
+                text=result[0],
+                score=result[1],
             )
 
             # score threshold check
