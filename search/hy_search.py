@@ -75,8 +75,8 @@ if documents:
                         documents=documents,
                         score_threshold=0.34,
                         top_n=len(documents)
-                        model="rerank-multilingual-v2.0"
-                        # model="/home/yuhp/llm_models/all_models/rank_model/bge-reranker-base"
+                        # model="rerank-multilingual-v2.0"
+                        model="/home/yuhp/llm_models/all_models/rank_model/bge-reranker-base"
                     ))
                 else:
                     all_documents.extend(documents)
