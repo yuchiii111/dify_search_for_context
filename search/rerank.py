@@ -65,8 +65,6 @@ class RerankRunner:
                 page_content=result.text,
                 metadata={
                     "doc_id": documents[result.index].metadata['doc_id'],
-                    "doc_hash": documents[result.index].metadata['doc_hash'],
-                    "document_id": documents[result.index].metadata['document_id'],
                     'score': result.score
                 }
             )
