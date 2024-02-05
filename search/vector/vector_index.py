@@ -13,7 +13,7 @@ class Vectorindex:
         self, 
         query: str, 
         embeddings: List[List[float]], 
-        document: List[str]
+        document: List[Document]
     ):
         
         self._client = weaviate.Client(url='http://localhost:8080')
@@ -37,11 +37,11 @@ class Vectorindex:
         with client.batch(
             batch_size=100
         ) as batch:
-            for i in range(document.shape[0]):
+            for i in range(df.shape[0]):
                 # 定义properties
                 properties = {
-                    'doc_id': i+1,          
-                    '_doc': df.documents[i],  
+                    'doc_id': df.documents[i].metadata['doc_id'] ,          
+                    '_doc_': df.documents[i].page_content,  
                 }
                 custom_vector = df.embedding[i] # 这里是句子向量化后的数据
         
@@ -62,7 +62,7 @@ class Vectorindex:
         nearVector = {
             'vector': query_embed
         }
-        query_obj=self._client.query.get(self.class_name, ['doc_id', '_doc'])
+        query_obj=self._client.query.get(self.class_name, ['doc_id', '_doc_'])
         result = query_obj.with_near_vector(nearVector).with_limit(k).with_additional(['distance']).do()
 
         if "errors" in result:
@@ -70,7 +70,7 @@ class Vectorindex:
 
         docs = []
         for res in result["data"]["Get"][self.class_name]:
-            doc = res.pop('_doc')
+            doc = res.pop('_doc_')
             ad = res.pop('_additional')
             docs.append(Document(page_content=text, metadata=res))
         return docs
