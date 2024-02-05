@@ -55,6 +55,8 @@ class Vectorindex:
         self, k: int = 4
     ) -> List[Document]:
 
+        self.import_data()
+        
         sim_embed = embed()
         query_embed = sim_embed.embedding_query(self._query)
         nearVector = {
