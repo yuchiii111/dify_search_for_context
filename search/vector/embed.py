@@ -1,6 +1,6 @@
 from langchain.embeddings import HuggingFaceBgeEmbeddings
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
-from langchain.vectorstores import Chroma
+# from langchain.vectorstores import Chroma
 # import numpy as np
 from typing import List
 
