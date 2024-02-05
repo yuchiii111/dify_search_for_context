@@ -8,10 +8,10 @@ from langchain.schema import Document
 
 
 class search():
-    def hybrid_search(self, query: str, document) -> List[str]:
+    def hybrid_search(self, query: str, document, embeddings, kwtab) -> List[str]:
 
-        vector_results = self.vector_search(query, document)
-        keyword_results = self.keyword_search(query, document)
+        vector_results = self.vector_search(query, document, embeddings)
+        keyword_results = self.keyword_search(query, document, kwtab)
 
         all_docs = self.uni_doc(vector_results, keyword_results)
 
@@ -20,19 +20,15 @@ class search():
         return rerank_documents
 
 
-    def keyword_search(self, query: str, texts: List[Document]) -> List[str]:
+    def keyword_search(self, query: str, texts: List[Document], keywordtab) -> List[str]:
 
         _keyword_search = KeywordTableIndex(texts)
-        keywordtable = _keyword_search.create_keyword_table()
-        results = _keyword_search._retrieve_ids_by_query(keyword_table, query)    
+        results = _keyword_search._retrieve_ids_by_query(keywordtab, query)    
 
         return results
 
     
-    def vector_search(self, query, document)：
-        vec_embed = embed()
-        doc_embed = [doc.page_content for doc in document]
-        embeddings = vec_embed.embedding_documents(doc_embed)
+    def vector_search(self, query, document, embeddings)：
 
         Vectorsearch = Vectorindex(query,embeddings,document)
         document_vec = Vectorsearch.similarity_search_by_vector()
