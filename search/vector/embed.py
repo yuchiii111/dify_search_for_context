@@ -28,7 +28,7 @@ class embed:
                         encode_kwargs=encode_kwargs,
                         query_instruction="为文本生成向量表示用于文本检索"
                     )
-        embedding_result_ = hf.embed_documents(document)
+        embedding_result_ = hf.embed_documents(documents)
         return embedding_result_
             
 
