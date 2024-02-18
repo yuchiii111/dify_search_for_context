@@ -23,7 +23,7 @@ doc4 = loader4.load()
 # 处理pdf
 for pdf_id in range(1,len(doc3)):
     doc3[0].page_content = doc3[0].page_content+doc3[pdf_id].page_content
-    doc3.pop(pdf_id)
+doc3 = [doc3[0]]
 
 def load_split(documents):
     text_splitter = CharacterTextSplitter(separator="/n/n",chunk_overlap=0)
