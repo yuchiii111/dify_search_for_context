@@ -28,7 +28,7 @@ class search():
         return results
 
     
-    def vector_search(self, query, document, embeddings)：
+    def vector_search(self, query, document, embeddings):
 
         Vectorsearch = Vectorindex(query,embeddings,document)
         document_vec = Vectorsearch.similarity_search_by_vector()
@@ -53,7 +53,7 @@ class search():
             query=query,
             documents=al_doc,
             score_threshold=0.34,
-            top_n=len(al_doc)
+            top_n=len(al_doc),
           # model="rerank-multilingual-v2.0"
             model="/home/yuhp/llm_models/all_models/rank_model/bge-reranker-base"
          )
