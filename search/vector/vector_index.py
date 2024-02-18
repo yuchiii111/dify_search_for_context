@@ -1,3 +1,4 @@
+import weaviate
 from langchain.vectorstores import VectorStore
 from search.rerank import RerankRunner
 from typing import List
