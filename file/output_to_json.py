@@ -54,7 +54,7 @@ answer_list = df.['FAQ回答'].tolist()
 run_search = search()
 data = []
 final_context = []
-for i, query in enumerate(query_list)：
+for i, query in enumerate(query_list):
     final_doc = run_search.hybrid_search(query, base_doc, embeddings, keywtab)
     context_list = [doc.page_content for doc in final_doc]
     dataset_ = {
