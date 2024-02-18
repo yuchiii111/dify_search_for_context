@@ -32,7 +32,7 @@ def load_split(documents):
 
 base_doc = []
 for doc_sp in [doc1,doc2,doc3,doc4]:
-    sp_doc = load_split(doc_sp).
+    sp_doc = load_split(doc_sp)
     base_doc.extend(sp_doc)
 
 for doc_id, doc_seg in enumerate(base_doc):
@@ -48,8 +48,8 @@ keyword_search = KeywordTableIndex(base_doc)
 keywtab = keyword_search.create_keyword_table()
 
 df = pd.read_csv(query_csv_file_path, encoding='utf-8')
-query_list = df.['FAQ问题'].tolist()
-answer_list = df.['FAQ回答'].tolist()
+query_list = df['FAQ问题'].tolist()
+answer_list = df['FAQ回答'].tolist()
 
 run_search = search()
 data = []
