@@ -13,9 +13,6 @@ generation_kwargs:
     - "Answer:"
   temperature: 0.0
 metric_list:
-  - metric: bleu
-    aggregation:
-    higher_is_better: true
   - metric: em
     aggregation: mean
     higher_is_better: true
