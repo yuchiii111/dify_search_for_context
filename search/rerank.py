@@ -8,8 +8,8 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 class RerankRunner:
 
-    def run(self, query: str, documents: List[Document], score_threshold: Optional[float] = None,
-            top_n: Optional[int] = None, model ) -> List[Document]:
+    def run(self, query: str, documents: List[Document], model, score_threshold: Optional[float] = None,
+            top_n: Optional[int] = None) -> List[Document]:
 
               
         docs = []
