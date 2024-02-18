@@ -46,7 +46,7 @@ def compute_scores(gold_list, pred):
 
 def process_results(doc, results):
     gold_list = doc_to_target(doc)
-    pred = results[0].strip().split("\n")[0]
+    pred = results[0]
 
     scores = compute_scores(gold_list, pred)
     return scores
