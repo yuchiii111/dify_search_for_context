@@ -2,6 +2,7 @@ from search.hy_search import search
 from search.vector.embed import embed
 from search.keyword.keyword_search import KeywordTableIndex
 import pandas as pd
+import json
 from langchain.document_loaders import TextLoader,CSVLoader
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
@@ -12,6 +13,7 @@ loader2 = CSVLoader(file_path='')
 loader3 = PyPDFLoader(file_path='')
 loader4 = TextLoader(file_path='')
 query_csv_file_path = " "
+dataset_json_file_path = ""
 
 doc1 = loader1.load()
 doc2 = loader2.load()
@@ -47,14 +49,23 @@ keywtab = keyword_search.create_keyword_table()
 
 df = pd.read_csv(query_csv_file_path, encoding='utf-8')
 query_list = df.['FAQ问题'].tolist()
+answer_list = df.['FAQ回答'].tolist()
 
 run_search = search()
+data = []
 final_context = []
-for query in query_list：
+for i, query in enumerate(query_list)：
     final_doc = run_search.hybrid_search(query, base_doc, embeddings, keywtab)
-    final_context.append([doc.page_content for doc in final_doc])
+    context_list = [doc.page_content for doc in final_doc]
+    dataset_ = {
+        'answers': answer_list[i],
+        'context': context_list,
+        'id': i+1,
+        'question': query,
+    }
+    data.append(dataset_)
 
-df['context'] = final_context
-df.to_csv(query_csv_file_path, index=False, encoding='utf-8')
+with open(dataset_json_file_path, 'w', encoding='utf-8') as json_file:
+    json.dump(data, json_file, ensure_ascii=False, indent=4)
     
 
