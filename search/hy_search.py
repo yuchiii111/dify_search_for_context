@@ -45,7 +45,7 @@ class search():
         
         return new_doc
 
-    def rerank_doc(self, query, al_doc) ->List(Document) :
+    def rerank_doc(self, query, al_doc) ->List[Document] :
         
         rerank_runner = RerankRunner()
                       
