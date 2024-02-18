@@ -2,18 +2,17 @@ from itertools import zip_longest
 
 import transformers.data.metrics.squad_metrics as squad_metrics
 
+# input: preprompt
 
 def doc_to_text(doc):
-    # Given a passage p, the conversation history {q1, a1, . . . qi−1, ai−1}
-    # and a question qi, the task is to predict the answer ai
     preprompt = ""
-    doc_text = preprompt + "\n\n" + "context:{{"
+    doc_text = preprompt + "\n\n" + "<context>"
     for a in doc["context"]: 
         doc_text += doc["context"] + "\n\n"
     q = doc["FAQ问题"]
     question = f"Q: {q}\n\n"
     answer = f"A:"
-    doc_text += "}}" + question + answer
+    doc_text += "</context>" + question + answer
     return doc_text
 
 
