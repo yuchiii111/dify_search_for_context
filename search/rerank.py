@@ -1,6 +1,6 @@
 from typing import List, Optional
 from langchain.schema import Document
-import cohere
+# import cohere
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
