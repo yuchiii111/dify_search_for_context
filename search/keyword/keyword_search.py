@@ -9,7 +9,7 @@ class KeywordTableIndex():
     def __init__ (self, texts: List[Document]):
        self._texts = texts
    
-    def create_keyword_table(self, **kwargs) ->Dict(str: Set(str)) :
+    def create_keyword_table(self, **kwargs) ->Dict[str, Set[str]] :
         keyword_table_handler = JiebaKeywordTableHandler()
         keyword_table = {}
         # keyword_table = {key = keyword, value = set(doc.id)}
@@ -21,14 +21,14 @@ class KeywordTableIndex():
            
         return keyword_table
 
-    def _add_text_to_keyword_table(self, keyword_table: dict, id: str, keywords: list[str]) -> dict:
+    def _add_text_to_keyword_table(self, keyword_table: Dict, id: str, keywords: list[str]) -> Dict:
         for keyword in keywords:
             if keyword not in keyword_table:
                 keyword_table[keyword] = set()
             keyword_table[keyword].add(id)
         return keyword_table
 
-    def _retrieve_ids_by_query(self, keyword_table: dict, query: str, k: int = 4):
+    def _retrieve_ids_by_query(self, keyword_table: Dict, query: str, k: int = 4):
         keyword_table_handler = JiebaKeywordTableHandler()
         # 提取查询中的关键词，并返回set(str)
         keywords = keyword_table_handler.extract_keywords(query)
